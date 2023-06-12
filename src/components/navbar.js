@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function page({ children }) {
   return (
     <div className="flex h-screen">
@@ -10,7 +12,7 @@ export default function page({ children }) {
           />
         </div>
         <nav className="flex flex-col items-center justify-center h-full">
-          <a
+          <Link
             href="/profile"
             className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
           >
@@ -19,8 +21,8 @@ export default function page({ children }) {
               alt="Logo"
               className="h-6 w-6"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             href="/feed"
             class="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
           >
@@ -37,8 +39,8 @@ export default function page({ children }) {
                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
               ></path>
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/events"
             className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
           >
@@ -55,8 +57,8 @@ export default function page({ children }) {
                 d="M4 6h16M4 10h16M4 14h16M4 18h16"
               />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/communities"
             className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
           >
@@ -73,8 +75,8 @@ export default function page({ children }) {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/messages"
             className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
           >
@@ -91,7 +93,7 @@ export default function page({ children }) {
                 d="M13 10V3L4 14h7v7l9-11h-7z"
               />
             </svg>
-          </a>
+          </Link>
         </nav>
       </div>
       <div className="flex-grow bg-white">{children}</div>
