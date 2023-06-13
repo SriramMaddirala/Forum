@@ -1,9 +1,9 @@
-export default function page({params}) {
-  if(params){
-    console.log(params.id)
-  }
+export default function page({params, id}) {
+    if(params){
+      id = params.id
+    }
     return (
-      <div className="flex p-4 border-b">
+      <div className="flex p-4">
         <div className="flex-shrink-0">
           <img
             className="h-12 w-12 rounded-full"
@@ -13,7 +13,7 @@ export default function page({params}) {
         </div>
         <div className="ml-4">
           <h3 className="text-xl font-semibold text-gray-600">John Doe</h3>
-          <p className="text-gray-600">Commencing the forum with post</p>
+          <p className="text-gray-600">Commencing the forum with post {id}</p>
           <div className="flex items-center mt-2"></div>
         </div>
       </div>
