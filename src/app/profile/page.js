@@ -1,4 +1,4 @@
-import Post from '@/components/post'
+import Post from '@/app/post/[id]/page'
 export default function page() {
   return (
     <div className="container mx-auto py-8">
