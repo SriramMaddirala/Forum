@@ -1,4 +1,4 @@
-export default function page({ params, id }) {
+export default function page({ params, id, textContent }) {
   if (params) {
     id = params.id;
   }
@@ -13,7 +13,7 @@ export default function page({ params, id }) {
       </div>
       <div className="ml-4">
         <h3 className="text-xl font-semibold text-gray-600">John Doe</h3>
-        <p className="text-gray-600">Commencing the forum with post {id}</p>
+        <p className="text-gray-600">{textContent}</p>
         <div className="flex items-center mt-2"></div>
       </div>
     </div>

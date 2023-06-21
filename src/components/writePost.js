@@ -1,31 +1,31 @@
 "use client";
 import { useState } from "react";
 
-export default function writePost() {
+export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
   const [post, setPost] = useState("");
   const handleInputChange = (event) => {
-    console.log("clocked");
     setPost(event.target.value);
   };
 
   const handlePost = async (event) => {
-    console.log(post);
-    const response = await fetch("http://localhost:1025/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        PostId: 1,
-        PosterId: "1",
-        CommId: "1",
-        ParentPostId: "1",
-        TextContent: post,
-        MediaLinks: "",
-        EventId: "1",
-      }),
-    });
-    //add try-catch here
+    try {
+      const response = await fetch("http://localhost:1025/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          PosterId: PosterId,
+          CommId: CommId,
+          ParentPostId: ParentPostId,
+          TextContent: post,
+          MediaLinks: "",
+          EventId: EventId,
+        }),
+      });
+    } catch (e) {
+      alert(e);
+    }
     setPost("");
   };
 

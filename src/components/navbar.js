@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function page({ children }) {
   return (
@@ -13,7 +13,7 @@ export default function page({ children }) {
         </div>
         <nav className="flex flex-col items-center justify-center h-full">
           <Link
-            href="/profile"
+            href="/profile/1"
             className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
           >
             <img
