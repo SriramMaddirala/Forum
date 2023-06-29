@@ -1,6 +1,26 @@
-export default function page({ params, id, textContent }) {
+async function getPost(id) {
+  console.log(`http://localhost:1025/getpost?postid=${encodeURIComponent(id)}`);
+  const res = await fetch(
+    `http://localhost:1025/getpost?postid=${encodeURIComponent(id)}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 2 },
+    }
+  );
+  const jsonResponse = await res.json();
+  return jsonResponse;
+}
+export default async function page({ params, id, textContent, posterid }) {
   if (params) {
     id = params.id;
+  }
+  if (!textContent) {
+    const response = await getPost(id);
+    textContent = response.TextContent;
+    posterid = response.PosterId;
   }
   return (
     <div className="flex p-4 hover:bg-blue-200">
@@ -12,7 +32,7 @@ export default function page({ params, id, textContent }) {
         />
       </div>
       <div className="ml-4">
-        <h3 className="text-xl font-semibold text-gray-600">John Doe</h3>
+        <h3 className="text-xl font-semibold text-gray-600">{posterid}</h3>
         <p className="text-gray-600">{textContent}</p>
         <div className="flex items-center mt-2"></div>
       </div>

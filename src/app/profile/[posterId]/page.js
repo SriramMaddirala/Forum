@@ -1,15 +1,17 @@
-"use client";
 import Post from "@/app/post/[id]/page";
 import Link from "next/link";
 import WritePost from "@/components/writePost";
 async function getPostsForPoster({ id }) {
-  const res = await fetch("http://localhost:1025/get", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    next: { revalidate: 2 },
-  });
+  const res = await fetch(
+    `http://localhost:1025/getposter?posterid=${encodeURIComponent(id)}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 2 },
+    }
+  );
   const jsonResponse = await res.json();
   return jsonResponse;
 }
@@ -22,6 +24,7 @@ export default async function page({ params }) {
         <Post
           id={response[key].PostId}
           textContent={response[key].TextContent}
+          posterid={response[key].posterId}
         ></Post>
       </Link>
     );
