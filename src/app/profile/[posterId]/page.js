@@ -20,13 +20,15 @@ export default async function page({ params }) {
   const posts = [];
   for (const key in response) {
     posts.push(
-      <Link href={`/post/${response[key].PostId}`}>
-        <Post
-          id={response[key].PostId}
-          textContent={response[key].TextContent}
-          posterid={response[key].posterId}
-        ></Post>
-      </Link>
+      <li key={response[key].PostId}>
+        <Link href={`/post/${response[key].PostId}`}>
+          <Post
+            id={response[key].PostId}
+            textContent={response[key].TextContent}
+            posterid={response[key].posterId}
+          ></Post>
+        </Link>
+      </li>
     );
   }
   return (
@@ -40,7 +42,7 @@ export default async function page({ params }) {
             EventId={""}
           />
         </div>
-        <div>{posts}</div>
+        <ul>{posts}</ul>
       </div>
     </div>
   );

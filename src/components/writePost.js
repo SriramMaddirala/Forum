@@ -1,14 +1,57 @@
 "use client";
 import { useState } from "react";
-
+function PreviewImage(image) {
+  if (image.image != null && image.image != "") {
+    return <img src={image.image} className="w-64 h-64"></img>;
+  }
+  return <></>;
+}
+function mapContentType(fileType) {
+  switch (fileType) {
+    case "jpg":
+    case "jpeg":
+      return "image/jpeg";
+    case "webp":
+      return "image/webp";
+    case "png":
+      return "image/png";
+  }
+}
 export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
   const [post, setPost] = useState("");
-  const handleInputChange = (event) => {
+  const [photo, setPhoto] = useState();
+  let url = "";
+  if (photo != null) {
+    url = URL.createObjectURL(photo);
+  }
+  const handleTextChange = (event) => {
     setPost(event.target.value);
+  };
+  const handlePhotoUpload = (event) => {
+    console.log(event.target.files[0]);
+    setPhoto(event.target.files[0]);
   };
 
   const handlePost = async (event) => {
     try {
+      let medianame = "noMedia";
+      if (url.length > 0) {
+        medianame = url.split("/")[3];
+        const split = photo.name.split(".");
+        const uploadResponse = await fetch(
+          `http://localhost:1025/upload?medianame=${encodeURIComponent(
+            medianame
+          )}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/" + mapContentType(split[split.length - 1]),
+            },
+            body: photo,
+          }
+        );
+      }
       const response = await fetch("http://localhost:1025/add", {
         method: "POST",
         headers: {
@@ -19,7 +62,7 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
           CommId: CommId,
           ParentPostId: ParentPostId,
           TextContent: post,
-          MediaLinks: "",
+          MediaLinks: medianame,
           EventId: EventId,
         }),
       });
@@ -36,7 +79,7 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
         <textarea
           className="w-full p-2 border border-gray-300 text-black rounded mb-2"
           placeholder="What's happening?"
-          onInput={handleInputChange}
+          onInput={handleTextChange}
           defaultValue={""}
         />
         <button
@@ -46,6 +89,25 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
         >
           Post
         </button>
+        <div className="flex items-center justify-end">
+          <label
+            htmlFor="photo-upload"
+            className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Attach Photo
+          </label>
+          <input
+            type="file"
+            id="photo-upload"
+            accept="image/*"
+            className="hidden"
+            onChange={handlePhotoUpload}
+            onDragEnter={handlePhotoUpload}
+            onDragOver={handlePhotoUpload}
+            onDrop={handlePhotoUpload}
+          />
+          <PreviewImage image={url} />
+        </div>
       </form>
     </div>
   );
