@@ -1,5 +1,4 @@
 import Post from "@/app/post/[id]/page";
-import Link from "next/link";
 import WritePost from "@/components/writePost";
 async function getPostsForPoster({ id }) {
   const res = await fetch(
@@ -21,13 +20,12 @@ export default async function page({ params }) {
   for (const key in response) {
     posts.push(
       <li key={response[key].PostId}>
-        <Link href={`/post/${response[key].PostId}`}>
-          <Post
-            id={response[key].PostId}
-            textContent={response[key].TextContent}
-            posterid={response[key].posterId}
-          ></Post>
-        </Link>
+        <Post
+          id={response[key].PostId}
+          textContent={response[key].TextContent}
+          posterid={response[key].PosterId}
+          mediapath={response[key].MediaLinks}
+        />
       </li>
     );
   }

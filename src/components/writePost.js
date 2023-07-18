@@ -34,6 +34,7 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
 
   const handlePost = async (event) => {
     try {
+      event.preventDefault();
       let medianame = "noMedia";
       if (url.length > 0) {
         medianame = url.split("/")[3];
@@ -66,8 +67,10 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
           EventId: EventId,
         }),
       });
+      setPost("");
+      setPhoto();
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     setPost("");
   };
