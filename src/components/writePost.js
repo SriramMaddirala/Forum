@@ -24,14 +24,6 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
   if (photo != null) {
     url = URL.createObjectURL(photo);
   }
-  const handleTextChange = (event) => {
-    setPost(event.target.value);
-  };
-  const handlePhotoUpload = (event) => {
-    console.log(event.target.files[0]);
-    setPhoto(event.target.files[0]);
-  };
-
   const handlePost = async (event) => {
     try {
       event.preventDefault();
@@ -82,7 +74,7 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
         <textarea
           className="w-full p-2 border border-gray-300 text-black rounded mb-2"
           placeholder="What's happening?"
-          onInput={handleTextChange}
+          onInput={(event) => setPost(event.target.value)}
           defaultValue={""}
         />
         <button
@@ -104,10 +96,10 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
             id="photo-upload"
             accept="image/*"
             className="hidden"
-            onChange={handlePhotoUpload}
-            onDragEnter={handlePhotoUpload}
-            onDragOver={handlePhotoUpload}
-            onDrop={handlePhotoUpload}
+            onChange={(event) => setPhoto(event.target.files[0])}
+            onDragEnter={(event) => setPhoto(event.target.files[0])}
+            onDragOver={(event) => setPhoto(event.target.files[0])}
+            onDrop={(event) => setPhoto(event.target.files[0])}
           />
           <PreviewImage image={url} />
         </div>
