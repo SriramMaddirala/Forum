@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Suspense } from "react";
 
 import DeletePost from "@/components/deletePost";
 async function GetImage({ mediapath }) {
@@ -13,7 +12,7 @@ async function GetImage({ mediapath }) {
   );
   const file = await res.blob();
   const url = URL.createObjectURL(file);
-  if (url == null) {
+  if (url === null) {
     return null;
   }
   return <img src={url} />;

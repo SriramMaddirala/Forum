@@ -3,40 +3,61 @@
 import { useState } from "react";
 export default function page() {
   const [wantsLogin, setWantsLogin] = useState(true);
-  const [UserName, setUserName] = useState("");
+  const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [DupPassword, setDupPassword] = useState("");
   const [Email, setEmail] = useState("");
   const handleLogin = async (event) => {
+    event.preventDefault();
     const res = await fetch(`http://localhost:1025/login`, {
       method: "POST",
       headers: {},
       next: { revalidate: 2 },
       body: JSON.stringify({
-        UserName: UserName,
+        Username: Username,
         Password: Password,
       }),
     });
+    if (res.ok) {
+      setUsername("");
+      setPassword("");
+    } else {
+      alert(res.status);
+    }
   };
   const handleSignup = async (event) => {
     event.preventDefault();
+    if (DupPassword !== Password) {
+      setPassword("");
+      setDupPassword("");
+      alert("Passwords don't match");
+      return;
+    }
     const res = await fetch(`http://localhost:1025/signup`, {
       method: "POST",
       headers: {},
       next: { revalidate: 2 },
       body: JSON.stringify({
-        UserName: UserName,
+        Username: Username,
         Password: Password,
         Email: Email,
       }),
     });
+    if (res.ok) {
+      setUsername("");
+      setPassword("");
+      setDupPassword("");
+      setEmail("");
+    } else {
+      alert(res.status);
+    }
   };
   if (wantsLogin) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="bg-white p-8 rounded shadow-lg">
           <h2 className="text-2xl font-bold mb-4">Login</h2>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -48,9 +69,9 @@ export default function page() {
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="username"
-                value={UserName}
+                value={Username}
                 placeholder="Enter your username"
-                onInput={(event) => setUserName(event.target.value)}
+                onInput={(event) => setUsername(event.target.value)}
               />
             </div>
             <div className="mb-4">
@@ -92,7 +113,7 @@ export default function page() {
     <div className="flex items-center justify-center h-screen">
       <div className="bg-white p-8 rounded shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Signup</h2>
-        <form>
+        <form onSubmit={handleSignup}>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -104,9 +125,9 @@ export default function page() {
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="name"
               type="text"
-              value={UserName}
+              value={Username}
               placeholder="Enter your name"
-              onInput={(event) => setUserName(event.target.value)}
+              onInput={(event) => setUsername(event.target.value)}
             />
           </div>
           <div className="mb-4">
