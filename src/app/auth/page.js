@@ -1,5 +1,6 @@
 "use client";
 
+import { setCookie } from "@/utilities/cookies";
 import { useState } from "react";
 export default function page() {
   const [wantsLogin, setWantsLogin] = useState(true);
@@ -19,6 +20,8 @@ export default function page() {
       }),
     });
     if (res.ok) {
+      const json = await res.json();
+      setCookie("posterId", json.PosterId);
       setUsername("");
       setPassword("");
     } else {
@@ -44,6 +47,8 @@ export default function page() {
       }),
     });
     if (res.ok) {
+      const json = await res.json();
+      setCookie("posterId", json.PosterId);
       setUsername("");
       setPassword("");
       setDupPassword("");

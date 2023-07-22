@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Nav from "@/components/navbar";
+import Navbar from "@/components/navbarLogin";
 import AwwwardsTheme from "@/components/awardstheme";
 import { ThemeProvider } from "@mui/material";
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider theme={AwwwardsTheme}>
-          <Nav>{children}</Nav>
+          <Navbar>{children}</Navbar>
         </ThemeProvider>
       </body>
     </html>
