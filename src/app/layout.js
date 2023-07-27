@@ -1,9 +1,12 @@
 import "./globals.css";
+import dynamic from "next/dynamic";
+
 import { Inter } from "next/font/google";
-import Navbar from "@/components/navbarLogin";
 import AwwwardsTheme from "@/components/awardstheme";
 import { ThemeProvider } from "@mui/material";
-
+const Navbar = dynamic(() => import("@/components/navbarLogin"), {
+  ssr: false,
+});
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

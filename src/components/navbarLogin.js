@@ -1,6 +1,15 @@
 "use client";
-import { getCookie } from "@/utilities/cookies";
 import Link from "next/link";
+function getCookie(name) {
+  const cookieArray = document.cookie.split("; ");
+  for (const cookie of cookieArray) {
+    const [cookieName, cookieValue] = cookie.split("=");
+    if (decodeURIComponent(cookieName) === name) {
+      return decodeURIComponent(cookieValue);
+    }
+  }
+  return null;
+}
 function NavbarloggedIn({ children, posterId }) {
   return (
     <div className="flex h-screen">
@@ -107,11 +116,16 @@ export default function page({ children }) {
   if (posterId !== null) {
     return <NavbarloggedIn posterId={posterId}>{children}</NavbarloggedIn>;
   }
-
   return (
     <div className="flex h-screen">
       <div className="bg-gray-200 w-16">
         <nav className="flex flex-col items-center justify-center h-full">
+          <Link
+            href="/login"
+            className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
+          >
+            <img src="/key.png" />
+          </Link>
           <Link
             href="/events"
             className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
