@@ -27,7 +27,7 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
   const handlePost = async (event) => {
     try {
       event.preventDefault();
-      let medianame = "noMedia";
+      let medianame = "";
       if (url.length > 0) {
         medianame = url.split("/")[3];
         const split = photo.name.split(".");
@@ -44,6 +44,10 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
             body: photo,
           }
         );
+        if (!uploadResponse.ok) {
+          console.log("Request failed with status:", uploadResponse.status);
+          throw new Error("Network response was not ok.");
+        }
       }
       const response = await fetch("http://localhost:1025/add", {
         method: "POST",
@@ -59,6 +63,10 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
           EventId: EventId,
         }),
       });
+      if (!response.ok) {
+        console.log("Request failed with status:", response.status);
+        throw new Error("Network response was not ok.");
+      }
       setPost("");
       setPhoto();
     } catch (e) {

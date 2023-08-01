@@ -1,10 +1,8 @@
 "use client";
-
 import { useState } from "react";
 function setCookie(name, value) {
   document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 }
-
 export default function page() {
   const [wantsLogin, setWantsLogin] = useState(true);
   const [Username, setUsername] = useState("");

@@ -15,11 +15,16 @@ function NavbarloggedIn({ children, posterId }) {
     <div className="flex h-screen">
       <div className="bg-gray-200 w-16">
         <div className="flex items-center justify-center h-16">
-          <img
-            src="https://d2x51gyc4ptf2q.cloudfront.net/content/uploads/2021/05/08150953/eric-dier.jpg"
-            alt="Logo"
-            className="h-8 w-8"
-          />
+          <Link
+            href={`/profile/${posterId}`}
+            className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
+          >
+            <img
+              src="https://d2x51gyc4ptf2q.cloudfront.net/content/uploads/2021/05/08150953/eric-dier.jpg"
+              alt="Logo"
+              className="h-8 w-8"
+            />
+          </Link>
         </div>
         <nav className="flex flex-col items-center justify-center h-full">
           <Link

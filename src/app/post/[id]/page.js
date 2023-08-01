@@ -2,6 +2,9 @@ import Link from "next/link";
 
 import DeletePost from "@/components/deletePost";
 async function GetImage({ mediapath }) {
+  if (mediapath === "" || mediapath === null) {
+    return null;
+  }
   const res = await fetch(
     `http://localhost:1025/getFile?mediapath=${encodeURIComponent(mediapath)}`,
     {
