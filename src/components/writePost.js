@@ -67,8 +67,7 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
         console.log("Request failed with status:", response.status);
         throw new Error("Network response was not ok.");
       }
-      setPost("");
-      setPhoto();
+      window.location.reload();
     } catch (e) {
       console.log(e);
     }

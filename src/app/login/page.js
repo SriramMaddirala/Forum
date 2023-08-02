@@ -23,8 +23,7 @@ export default function page() {
     if (res.ok) {
       const json = await res.json();
       setCookie("posterId", json.PosterId);
-      setUsername("");
-      setPassword("");
+      window.location.reload();
     } else {
       alert(res.status);
     }
@@ -50,10 +49,7 @@ export default function page() {
     if (res.ok) {
       const json = await res.json();
       setCookie("posterId", json.PosterId);
-      setUsername("");
-      setPassword("");
-      setDupPassword("");
-      setEmail("");
+      window.location.reload();
     } else {
       alert(res.status);
     }
