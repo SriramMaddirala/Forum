@@ -109,6 +109,24 @@ function NavbarloggedIn({ children, posterId }) {
               />
             </svg>
           </Link>
+          <Link
+            href="/search"
+            className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-6 h-6"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </Link>
         </nav>
       </div>
       <div className="flex-grow bg-white">{children}</div>
@@ -165,6 +183,24 @@ export default function page({ children }) {
                 strokeWidth={2}
                 d="M6 18L18 6M6 6l12 12"
               />
+            </svg>
+          </Link>
+          <Link
+            href="/search"
+            className="text-gray-600 hover:bg-blue-200 rounded-full p-3 mb-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-6 h-6"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </Link>
         </nav>
