@@ -71,7 +71,6 @@ export default function writePost({ PosterId, CommId, ParentPostId, EventId }) {
     } catch (e) {
       console.log(e);
     }
-    setPost("");
   };
 
   return (
