@@ -24,6 +24,7 @@ export default function page() {
         next: { revalidate: 2 },
       }
     );
+    console.log(res);
     window.location.reload();
   };
   return (
